@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> 
+
+    <title>Signup</title>
+</head>
+<body>
+
+<div>
+    <h2>Sign Up</h2>
+    <form method="POST" action="{{ url_for('signup') }}">
+        {{ form.csrf_token }}
+
+        <label for="username">Username:</label>
+        <input type="text" name="username" required>
+        {% for error in form.username.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+        {% for error in form.password.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+
+        <br>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <br>
+
+    <p>Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+</div>
+
+</body>
+</html>

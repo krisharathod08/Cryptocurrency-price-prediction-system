@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Price Prediction</title>
+</head>
+<body>
+
+<div>
+    <h2>Price Prediction</h2>
+    <form method="POST" action="{{ url_for('price_prediction') }}">
+        {{ form.csrf_token }}
+
+        <label for="{{ form.cryptocurrency.id }}">Choose a Cryptocurrency:</label>
+        {{ form.cryptocurrency(class="form-control") }}
+        {% for error in form.cryptocurrency.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+
+        <br>
+
+        <label for="{{ form.model.id }}">Choose a Model:</label>
+        {{ form.model(class="form-control") }}
+        {% for error in form.model.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+
+        <br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if img_str %}
+        <img src="data:image/png;base64,{{ img_str }}" alt="Price Prediction Figure">
+    {% endif %}
+
+</div>
+
+</body>
+</html>
